@@ -1,48 +1,58 @@
 import simple_graphics as sg
+import random
 
+def draw_point_star(cx, cy, size, color):
+    sg.set_fill_color(color)
+    sg.set_line_thickness(0)
+    sg.set_outline_color("#020210") 
+    sg.fill_circle(cx, cy, size)
+    
+def draw_glow_star(cx, cy, size, color):
+    sg.set_line_thickness(0)
+    sg.set_outline_color("#020210")
+    sg.set_fill_color("black")
+    sg.fill_circle(cx, cy, size * 4)
+    sg.set_fill_color("#ffcc00")
+    sg.fill_circle(cx, cy, size * 2)
+    sg.set_fill_color("black")
+    sg.fill_circle(cx, cy, size)
+    
+    
+
+    
 def draw_picture(width, height):
-    """Draws a static picture."""
+    sg.fill_background("#020210")
     
-    # Fill the background
-    sg.fill_background("white")
+    """ Nathan I used Generative ai for this part i recommend not changing it
+    """
     
-    # make some variables available
-    colors = ["red", "green", "blue", "cyan", "magenta", "yellow"]
-    
-    triangle_height = height/5
-    triangle_width = width / 3
-    
-    # Draw the tesselation
-    # code for red triangles
-    sg.set_fill_color(colors[0])
-    
-    # call fill
-    sg.fill_circle(450, 50,50)
+    tiny_colors = ["#333366", "#4d4d80", "#5c5c8a"]
+    for _ in range(600):
+        rx = random.randint(0, width)
+        ry = random.randint(0, height)
+        rs = random.uniform(0.1, 0.8)
+        rc = random.choice(tiny_colors)
+        draw_point_star (rx, ry, rs, rc)
+        
+    star_colors = ["#ffffff", "#e6f2ff", "#fff7e6", "#ffe6cc"]
+    for x in range(0, width, 2):
+        center_y = (height - 50) - (x * 0.5)
+        for _ in range(3):
+            star_x = x + random.randint(-60, 60)
+            star_y = center_y + random.randint(-50, 50)
+            star_size = random.uniform(0.3, 1.5)
+            star_color = random.choice(star_colors)
+            draw_point_star(star_x, star_y, star_size, star_color)
+            
 
-    # draw a mountain
-    sg.set_fill_color("#827e7e") # relatively dark gray
-    sg. fill_triangle(300, 150, 400, 20, 350, 150)
-    sg.set_fill_color("#c7c1c1") # lighter gray
-    sg. fill_triangle(350, 150, 400, 20, 550, 150)
-
-    # draw horizon
-    sg.set_outline_color("black")
-    sg.set_line_thickness(1)
-    sg.draw_line(0, 150, 600, 150)
-    
-    # Define the points the curve should bend through
-    river_points = [
-        (100, 150), # Start point
-        (300, 200), # Bends towards here
-        (200, 350), # Bends back here
-        (500, 500)  # End point
-    ]
-
-    sg.set_outline_color("blue")
-    sg.set_line_thickness(8)
-    sg.draw_curve(river_points)
-    
-
+            
+        
 if __name__ == "__main__":
-    # Launch the wrapper; only edit starting dimensions of canvas if you would like to
-    sg.start(draw_picture, 600, 400)
+    sg.start(draw_picture, 1200, 800)
+
+
+        
+        
+    
+
+
