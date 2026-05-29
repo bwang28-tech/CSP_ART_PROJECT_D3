@@ -48,7 +48,10 @@ def draw_picture(width, height):
             star_size = random.uniform(0.3, 1.5)
             star_color = random.choice(star_colors)
             draw_point_star(star_x, star_y, star_size, star_color)
-            
+  
+    sg.draw_moon(random.randint(200,400), 100, 75)
+    sg.draw_mountain_range(0, 600, width, 400)
+    
     # Snow on the ground
     sg.set_fill_color("#ddeeff")
     sg.set_outline_color("#ddeeff")
@@ -69,12 +72,9 @@ def draw_picture(width, height):
         ss = random.uniform(1, 4)
         draw_snowflake(sx, sy, ss)
                         
-    sg.draw_moon(random.randint(200,400), 100, 75)
-    sg.draw_mountain_range(0, 600, width, 400)
     
 if __name__ == "__main__":
     sg.start(draw_picture, 1200, 600)
-
 
         
         
