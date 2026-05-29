@@ -16,8 +16,13 @@ def draw_glow_star(cx, cy, size, color):
     sg.fill_circle(cx, cy, size * 2)
     sg.set_fill_color("black")
     sg.fill_circle(cx, cy, size)
-    
-    
+
+def draw_snowflake(cx, cy, size):
+    sg.set_fill_color("white")
+    sg.set_outline_color("#020210")
+    sg.set_line_thickness(0)
+    sg.fill_circle(cx, cy, size)
+
 
     
 def draw_picture(width, height):
@@ -44,11 +49,29 @@ def draw_picture(width, height):
             star_color = random.choice(star_colors)
             draw_point_star(star_x, star_y, star_size, star_color)
             
-
-            
+    # Snow on the ground
+    sg.set_fill_color("#ddeeff")
+    sg.set_outline_color("#ddeeff")
+    sg.set_line_thickness(1)
+    sg.fill_rectangle(0, height - 80, width, 80)
+ 
+    # Soft snow drifts
+    for i in range(0, width, 4):
+        drift_h = random.randint(10, 40)
+        sg.set_fill_color("#eef4ff")
+        sg.set_outline_color("#eef4ff")
+        sg.fill_circle(i, height - 80, drift_h)
+ 
+    # Falling snowflakes
+    for _ in range(200):
+        sx = random.randint(0, width)
+        sy = random.randint(0, height - 80)
+        ss = random.uniform(1, 4)
+        draw_snowflake(sx, sy, ss)
+                        
         
 if __name__ == "__main__":
-    sg.start(draw_picture, 1200, 800)
+    sg.start(draw_picture, 1200, 600)
 
 
         
