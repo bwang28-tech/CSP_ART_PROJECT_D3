@@ -69,7 +69,9 @@ def draw_picture(width, height):
         ss = random.uniform(1, 4)
         draw_snowflake(sx, sy, ss)
                         
-        
+    sg.draw_moon(random.randint(200,400), 100, 75)
+    sg.draw_mountain_range(0, 600, width, 400)
+    
 if __name__ == "__main__":
     sg.start(draw_picture, 1200, 600)
 

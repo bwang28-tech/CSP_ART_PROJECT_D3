@@ -182,3 +182,56 @@ def draw_text(x, y, text_string, font_size=16):
     """Draws text on the screen with the top-left corner at (x, y)."""
     _canvas.create_text(x, y, text=text_string, fill=_fill_color, 
                         anchor="nw", font=("Arial", font_size))
+
+def draw_mountain_range(start_x, start_y, total_width, average_height):
+    """
+    AI Attribution:
+    Tool used: Gemini
+    User Prompt: "i like to make the mountains overlap... same parameters"
+    """
+    num_mountains = 5
+    # Calculate the distance between each mountain peak
+    step_x = total_width / num_mountains
+    
+    # Make the base of each mountain wider than the step so they overlap each other
+    mountain_base_width = step_x * 1.6 
+    
+    for i in range(num_mountains):
+        # Calculate random height variation for a natural look (+/- 30% of average)
+        variation = average_height * 0.3
+        m_height = average_height + random.uniform(-variation, variation)
+        
+        # Determine coordinates for the mountain
+        peak_x = start_x + (i * step_x) + (step_x / 2)
+        bottom_left_x = peak_x - (mountain_base_width / 2)
+        bottom_right_x = peak_x + (mountain_base_width / 2)
+        peak_y = start_y - m_height
+        
+        # Draw the main grey mountain (layering happens automatically in this loop!)
+        set_fill_color("grey")
+        set_outline_color("black")
+        fill_triangle(bottom_left_x, start_y, bottom_right_x, start_y, peak_x, peak_y)
+        
+        # Calculate points for the snow cap (top 30% of the mountain)
+        snow_ratio = 0.3
+        snow_base_y = peak_y + (m_height * snow_ratio)
+        snow_half_width = (mountain_base_width / 2) * snow_ratio
+        
+        # Draw the white snow cap
+        set_fill_color("white")
+        fill_triangle(peak_x - snow_half_width, snow_base_y, peak_x + snow_half_width, snow_base_y, peak_x, peak_y)
+    
+def draw_moon(x, y, radius):
+    """
+    AI Attribution:
+    Tool used: Gemini
+    User Prompt: "i want you to generate a moon above the mountains. I want it to be in the middle of the screen in terms of x, and slightly higher than the mountains in terms of y... yes make it so that I can manually adjust it"
+    """
+    # Set the colors for the moon
+    set_fill_color("khaki")
+    set_outline_color("khaki")
+    
+    # Draw the solid circle using your library's helper function
+    fill_circle(x, y, radius)
+
+
