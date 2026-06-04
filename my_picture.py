@@ -87,6 +87,9 @@ def draw_picture(width, height):
     draw_mountain_snow_cap(950,  height - 80, 280, 45)
     draw_mountain_snow_cap(1150, height - 80, 320, 55)
 
+    # Moon - Bibu
+    sg.draw_moon(random.randint(200,400), 100, 75)
+
     # Snow on the ground - Kesha
     sg.set_fill_color("#ddeeff")
     sg.set_outline_color("#ddeeff")
